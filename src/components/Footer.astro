@@ -1,0 +1,33 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="px-6 py-12 border-t border-clay-100/50">
+  <div
+    class="mx-auto max-w-5xl flex flex-col md:flex-row gap-6 items-center justify-between text-sm text-ink-500"
+  >
+    <div class="flex items-center gap-3">
+      <img src="/icons/bowl.png" alt="" width="28" height="28" class="opacity-80" />
+      <span class="font-serif italic">pinkha · {year}</span>
+    </div>
+
+    <nav class="flex flex-wrap gap-6 justify-center">
+      <a href="/privacy" class="hover:text-clay-500 transition-colors">Privacy</a>
+      <a href="/terms" class="hover:text-clay-500 transition-colors">Terms</a>
+      <a
+        href="https://github.com/pinkha-app"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hover:text-clay-500 transition-colors"
+      >
+        GitHub
+      </a>
+      <a
+        href="mailto:ybikouta.pro@icloud.com"
+        class="hover:text-clay-500 transition-colors"
+      >
+        Contact
+      </a>
+    </nav>
+  </div>
+</footer>

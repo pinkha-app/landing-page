@@ -1,0 +1,92 @@
+---
+import Decor from "./Decor.astro";
+import Reveal from "./Reveal.astro";
+
+// Placeholders — drop real PNGs into /public/screens/ named:
+// editor.png, book.png, library.png
+const shots = [
+  {
+    src: "/screens/editor.png",
+    label: "leaf",
+    caption: "An editor that disappears.",
+    body: "Markdown shortcuts, inline color, drag to reorder. Undo 1000 steps deep.",
+  },
+  {
+    src: "/screens/book.png",
+    label: "book",
+    caption: "Databases that feel like paper.",
+    body: "Table, kanban, calendar. Properties, filters, sorts. Native iOS, native speed.",
+  },
+  {
+    src: "/screens/library.png",
+    label: "library",
+    caption: "A home that breathes.",
+    body: "Recents, shelves, books, compost. Everything you need, nothing you don't.",
+  },
+];
+---
+
+<section id="screens" class="relative isolate px-6 py-24 md:py-32 bg-clay-50/40 border-y border-clay-200/30 overflow-hidden">
+  <div aria-hidden="true" class="hidden md:block pointer-events-none absolute inset-0 -z-[5]">
+    <Decor type="leaf"    class="absolute top-20 right-[6%]  w-12 text-clay-300/75 rotate-[28deg]"  float={10} />
+    <Decor type="feather" class="absolute bottom-20 left-[5%] w-16 text-clay-300/90 rotate-[-18deg]" float={12} />
+  </div>
+
+  <div class="mx-auto max-w-6xl">
+    <Reveal>
+      <div class="text-center mb-20">
+        <div class="flex justify-center mb-6">
+          <Decor type="twig" class="w-16 text-clay-300/90 rotate-180" float="none" />
+        </div>
+        <p class="font-mono uppercase tracking-[0.25em] text-clay-400 text-xs mb-4">
+          Native to the bone
+        </p>
+        <h2 class="font-serif text-4xl md:text-6xl font-medium text-ink-900 leading-[1.05] max-w-3xl mx-auto">
+          SwiftUI on top.<br />
+          <span class="italic text-clay-500">Rust underneath.</span>
+        </h2>
+      </div>
+    </Reveal>
+
+    <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+      {
+        shots.map((s, i) => (
+          <Reveal delay={i * 120}>
+          <figure class="group" style={`transform: rotate(${(i - 1) * 1.2}deg)`}>
+            <!-- iPhone-like frame -->
+            <div class="relative mx-auto max-w-[280px] aspect-[9/19.5] rounded-[2.5rem] bg-ink-900 p-3 shadow-[0_30px_60px_-20px_rgba(126,73,35,0.4)] transition-transform group-hover:rotate-0 group-hover:scale-[1.02]">
+              <!-- Dynamic Island stand-in -->
+              <div class="absolute top-5 left-1/2 -translate-x-1/2 w-24 h-7 rounded-full bg-ink-900 z-10"></div>
+
+              <div class="w-full h-full rounded-[2rem] overflow-hidden bg-cream-100 relative flex items-center justify-center">
+                <img
+                  src={s.src}
+                  alt={s.caption}
+                  class="absolute inset-0 w-full h-full object-cover"
+                  onerror="this.style.display='none';"
+                />
+                <!-- placeholder fallback shows behind missing image -->
+                <span class="font-serif italic text-clay-300 text-lg">
+                  [ {s.label} ]
+                </span>
+              </div>
+            </div>
+
+            <figcaption class="mt-8 text-center">
+              <p class="font-mono uppercase tracking-widest text-xs text-clay-400 mb-2">
+                {s.label}
+              </p>
+              <p class="font-serif text-xl text-ink-900 mb-2 leading-snug">
+                {s.caption}
+              </p>
+              <p class="text-sm text-ink-500 leading-relaxed max-w-xs mx-auto">
+                {s.body}
+              </p>
+            </figcaption>
+          </figure>
+          </Reveal>
+        ))
+      }
+    </div>
+  </div>
+</section>

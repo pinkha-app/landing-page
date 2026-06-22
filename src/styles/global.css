@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/500.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+@theme {
+  /* Pinkha palette — cream paper, terracotta clay (from the bowl icon), ink */
+  --color-cream-50:  #faf6f0;
+  --color-cream-100: #f4ecdf;
+  --color-cream-200: #e8dcc4;
+  --color-cream-300: #d9c39c;
+
+  --color-clay-50:   #f9ede3;
+  --color-clay-100:  #f0d4b8;
+  --color-clay-200:  #e0ad7e;
+  --color-clay-300:  #c9874f;
+  --color-clay-400:  #a86838;
+  --color-clay-500:  #7e4923;
+  --color-clay-600:  #5c321a;
+
+  --color-ink-500:   #3a2a1f;
+  --color-ink-700:   #261a13;
+  --color-ink-900:   #18100a;
+
+  --font-serif: "Fraunces", "Iowan Old Style", "Cambria", serif;
+  --font-sans:  "Inter", system-ui, -apple-system, sans-serif;
+}
+
+html {
+  background: var(--color-cream-50);
+  color: var(--color-ink-700);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Smooth scroll for anchor clicks and JS scrollTo. */
+  scroll-behavior: smooth;
+  /* Nav floats at the top (desktop) — give anchored sections room to land below it. */
+  scroll-padding-top: 5rem;
+}
+
+/* On phones the navbar is bottom-anchored, so anchored landings can hug the top. */
+@media (max-width: 767px) {
+  html { scroll-padding-top: 1rem; }
+}
+
+/* Pinkha-tinted text selection — small detail, big polish. */
+::selection {
+  background: var(--color-clay-200);
+  color: var(--color-ink-900);
+}
+
+/* Balance headlines so they don't end with a single dangling word. */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+/* Reduce motion for users who ask for it. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-image:
+    radial-gradient(at 20% 10%, rgba(201, 135, 79, 0.04) 0, transparent 50%),
+    radial-gradient(at 80% 90%, rgba(168, 104, 56, 0.03) 0, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* On phones the navbar floats at the bottom — leave room so the footer and
+   in-page content never hide behind it (nav height ≈ 56 px + safe-area). */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+  }
+}

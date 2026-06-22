@@ -1,0 +1,99 @@
+---
+import "../styles/global.css";
+import NavBar from "../components/NavBar.astro";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Route-relative path for canonical/OG urls. Defaults to current request. */
+  path?: string;
+  /** Optional OG image override. Defaults to /icons/bowl.png. */
+  ogImage?: string;
+  showNav?: boolean;
+}
+
+const {
+  title,
+  description = "Pinkha — beautiful native notes for iPhone, iPad and Mac. Rich-text editor in Rust. Notion-style databases. Open source.",
+  path = Astro.url.pathname,
+  ogImage = "/icons/bowl.png",
+  showNav = true,
+} = Astro.props;
+
+const siteOrigin = Astro.site?.origin ?? "https://pinkha-app.vercel.app";
+const canonical  = new URL(path, siteOrigin).toString();
+const ogImageAbs = new URL(ogImage, siteOrigin).toString();
+
+// Structured data for search engines + AI crawlers. Identifies Pinkha as a
+// software application linked to its open-source repo + author.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Pinkha",
+  description,
+  url: siteOrigin,
+  applicationCategory: "ProductivityApplication",
+  operatingSystem: "iOS 26+",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  author: {
+    "@type": "Person",
+    name: "Yannis Bikouta",
+    email: "ybikouta.pro@icloud.com",
+  },
+  sameAs: ["https://github.com/pinkha-app/pinkha"],
+  image: ogImageAbs,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Robots / crawling -->
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/bowl.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/bowl.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/bowl.png" />
+    <link rel="shortcut icon" href="/icons/bowl.png" />
+    <meta name="apple-mobile-web-app-title" content="Pinkha" />
+    <meta name="theme-color" content="#faf6f0" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pinkha" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:image:alt" content="Pinkha logo — a small terracotta bowl." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+
+    <!-- Sitemap pointer (helps crawlers find sitemap-index.xml faster) -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- View Transitions — silky cross-fade when navigating between pages. -->
+    <ClientRouter />
+  </head>
+  <body class="min-h-screen">
+    {showNav && <NavBar />}
+    <slot />
+  </body>
+</html>

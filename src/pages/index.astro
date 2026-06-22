@@ -1,17 +1,23 @@
 ---
-
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import Features from "../components/Features.astro";
+import Manifesto from "../components/Manifesto.astro";
+import Screenshots from "../components/Screenshots.astro";
+import OpenSource from "../components/OpenSource.astro";
+import Footer from "../components/Footer.astro";
+import Particles from "../components/Particles.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base
+  title="Pinkha — Beautiful native notes for iPhone, iPad and Mac"
+  description="Pinkha is a native notes app with a Rust-powered rich-text editor and Notion-style databases. iOS 26+, open source under MIT or Apache 2.0. Join the TestFlight beta."
+>
+  <Particles />
+  <Hero />
+  <Features />
+  <Manifesto />
+  <Screenshots />
+  <OpenSource />
+  <Footer />
+</Base>

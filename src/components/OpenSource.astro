@@ -1,0 +1,85 @@
+---
+import Decor from "./Decor.astro";
+import Reveal from "./Reveal.astro";
+
+const repos = [
+  {
+    name: "pinkha",
+    desc: "The app. Rust core + SwiftUI front. iOS 26+.",
+    href: "https://github.com/pinkha-app/pinkha",
+    license: "MIT · Apache 2.0",
+  },
+  {
+    name: "chaqaq",
+    desc: "Standalone rich-text editor crate. Use it in your own Rust app.",
+    href: "https://github.com/pinkha-app/pinkha/tree/master/crates/chaqaq",
+    license: "crates.io",
+  },
+  {
+    name: "realm-codec",
+    desc: "Read & write Realm v9 binary. Powers the Craft importer.",
+    href: "https://github.com/pinkha-app/pinkha/tree/master/crates/realm-codec",
+    license: "crates.io",
+  },
+];
+---
+
+<section id="source" class="relative isolate px-6 py-24 md:py-32 overflow-hidden">
+  <div aria-hidden="true" class="hidden md:block pointer-events-none absolute inset-0 -z-[5]">
+    <Decor type="book" class="absolute top-16 left-[8%]   w-20 text-clay-300/80 rotate-[-10deg]" float={11} />
+    <Decor type="pen"  class="absolute bottom-16 right-[7%] w-16 text-clay-400/90 rotate-[-30deg]" float={9}  />
+  </div>
+
+  <div class="mx-auto max-w-4xl text-center">
+    <Reveal>
+      <div class="flex justify-center mb-6">
+        <Decor type="twig" class="w-16 text-clay-300/90" float="none" />
+      </div>
+      <p class="font-mono uppercase tracking-[0.25em] text-clay-400 text-xs mb-4">
+        Open source
+      </p>
+      <h2 class="font-serif text-4xl md:text-6xl font-medium text-ink-900 mb-6 leading-[1.05]">
+        A rich text editor in Rust
+        <span class="italic text-clay-500 block">didn't exist. Now it does.</span>
+      </h2>
+      <p class="text-lg text-ink-500 leading-relaxed max-w-2xl mx-auto mb-16">
+        Every piece is in the open. Read the code, fork it, ship it in your own app.
+        MIT or Apache 2.0 — your pick.
+      </p>
+    </Reveal>
+
+    <div class="grid sm:grid-cols-3 gap-4">
+      {
+        repos.map((r, i) => (
+          <Reveal delay={i * 100}>
+          <a
+            href={r.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group block text-left p-6 rounded-2xl bg-cream-50 border border-clay-200/30 hover:border-clay-400/50 hover:-translate-y-1 transition-all hover:shadow-[0_12px_30px_-12px_rgba(126,73,35,0.18)]"
+          >
+            <div class="flex items-center justify-between mb-3">
+              <p class="font-mono text-sm text-clay-500">{r.name}</p>
+              <span class="text-xs font-mono text-clay-300 group-hover:text-clay-400 transition-colors">→</span>
+            </div>
+            <p class="text-sm text-ink-700 leading-relaxed mb-4">{r.desc}</p>
+            <p class="text-xs font-mono text-clay-400 uppercase tracking-wide">
+              {r.license}
+            </p>
+          </a>
+          </Reveal>
+        ))
+      }
+    </div>
+
+    <p class="mt-16 text-sm text-ink-500 italic font-serif">
+      Built solo, in the open, with love.
+      <a
+        href="https://github.com/pinkha-app/pinkha"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-clay-500 underline"
+      >Send a PR.</a>
+    </p>
+  </div>
+</section>

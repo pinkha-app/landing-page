@@ -1,0 +1,170 @@
+---
+import Decor from "./Decor.astro";
+
+const testflightUrl =
+  Astro.props.testflightUrl ??
+  "https://testflight.apple.com/join/REPLACE_ME";
+---
+
+<section class="relative isolate px-6 pt-16 md:pt-40 pb-24 md:pb-36 overflow-hidden">
+  <!-- Ambient warm gradient blobs -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[760px] h-[760px] rounded-full bg-clay-100/40 blur-3xl"></div>
+    <div class="absolute -top-20 -right-40 w-[420px] h-[420px] rounded-full bg-clay-200/30 blur-3xl"></div>
+    <div class="absolute bottom-0 -left-32 w-[380px] h-[380px] rounded-full bg-cream-200/60 blur-3xl"></div>
+  </div>
+
+  <!-- Hand-drawn scribbles floating around the hero. Hidden on phones to
+       keep things clean ; on desktop they add the Bear/Craft warmth. -->
+  <div aria-hidden="true" class="hidden md:block pointer-events-none absolute inset-0 -z-[5]">
+    <Decor type="leaf"    class="absolute top-32  left-[8%]    w-16 text-clay-300/80 rotate-[-22deg]" float={11} />
+    <Decor type="pen"     class="absolute top-40  right-[10%]  w-20 text-clay-400/75 rotate-[18deg]"  float={9}  />
+    <Decor type="feather" class="absolute bottom-24 left-[6%]  w-14 text-clay-300/90 rotate-[14deg]"  float={13} />
+    <Decor type="sprig"   class="absolute bottom-32 right-[8%] w-28 text-clay-400/90 rotate-[-8deg]"  float={10} />
+    <Decor type="ink"     class="absolute top-1/3  right-[22%] w-4  text-clay-400/60"                 float={7}  />
+    <Decor type="ink"     class="absolute bottom-1/3 left-[24%] w-3 text-clay-400/60"                 float={8}  />
+  </div>
+
+  <div class="mx-auto max-w-4xl text-center relative">
+    <!-- Bowl as the centerpiece with a soft halo. Sized down so it lives below
+         the floating navbar without bleeding into it. -->
+    <div class="relative inline-block mb-10">
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 -z-10 blur-2xl bg-clay-300/40 rounded-full scale-110"
+      ></div>
+      <img
+        src="/icons/bowl.png"
+        alt="Pinkha bowl logo — a small terracotta bowl."
+        width="160"
+        height="160"
+        data-parallax-bowl
+        fetchpriority="high"
+        class="h-24 w-24 md:h-32 md:w-32 select-none drop-shadow-[0_24px_40px_rgba(126,73,35,0.25)] will-change-transform"
+      />
+    </div>
+
+    <p class="font-mono text-xs uppercase tracking-[0.25em] text-clay-400 mb-5">
+      pinkha &middot; v1.0 beta
+    </p>
+
+    <h1
+      class="font-serif text-6xl md:text-8xl font-medium tracking-tight text-ink-900 leading-[0.95]"
+    >
+      Take a leaf.
+    </h1>
+    <h1
+      class="font-serif text-6xl md:text-8xl font-medium tracking-tight italic text-clay-500 leading-[0.95] mt-1"
+    >
+      Grow a library.
+    </h1>
+
+    <p
+      class="mt-8 text-lg md:text-2xl text-ink-500 leading-relaxed max-w-2xl mx-auto font-serif"
+    >
+      Notes you'll actually want to come back to.
+      Native on iPhone, iPad and Mac. Rich text in Rust.
+      <span class="text-ink-700">Open source.</span>
+    </p>
+
+    <div class="mt-12 flex flex-col sm:flex-row gap-3 justify-center">
+      <a
+        href={testflightUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-magnetic
+        class="inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 px-7 py-3.5 text-cream-50 font-medium hover:bg-clay-500 transition-colors shadow-[0_8px_24px_-6px_rgba(126,73,35,0.4)] will-change-transform"
+      >
+        Join the TestFlight beta
+        <span aria-hidden="true">→</span>
+      </a>
+      <a
+        href="https://github.com/pinkha-app/pinkha"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 rounded-full bg-cream-50/80 backdrop-blur border border-clay-200/60 px-7 py-3.5 text-ink-700 font-medium hover:bg-cream-100 transition-colors"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.21c0 .21.15.46.55.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        Star on GitHub
+      </a>
+    </div>
+
+    <p class="mt-10 text-xs text-clay-400 font-mono">
+      free &middot; iOS 26+ &middot; ipad &amp; mac coming
+    </p>
+  </div>
+</section>
+
+<script>
+  // ── Parallax bowl ─────────────────────────────────────────────────────
+  // The bowl drifts downward slightly slower than the page scroll, giving
+  // it a feeling of depth without overpowering the user.
+  const bowl = document.querySelector<HTMLImageElement>("[data-parallax-bowl]");
+  if (bowl && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY * 0.18;
+        bowl.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0)`;
+        raf = 0;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  // ── Magnetic CTAs ─────────────────────────────────────────────────────
+  // The button gently leans toward the pointer when within `RADIUS` px.
+  // The element's transform is restored when the pointer leaves.
+  const magnets = document.querySelectorAll<HTMLElement>("[data-magnetic]");
+  if (magnets.length && matchMedia("(hover: hover)").matches) {
+    const RADIUS = 140;
+    const PULL   = 0.28;
+
+    for (const el of Array.from(magnets)) {
+      let raf = 0;
+      let tx = 0, ty = 0;
+      let targetX = 0, targetY = 0;
+
+      const tick = () => {
+        // Light LERP toward the target so the magnet feels springy, not snappy.
+        tx += (targetX - tx) * 0.18;
+        ty += (targetY - ty) * 0.18;
+        el.style.transform = `translate3d(${tx.toFixed(2)}px, ${ty.toFixed(2)}px, 0)`;
+
+        if (Math.abs(targetX - tx) > 0.1 || Math.abs(targetY - ty) > 0.1) {
+          raf = requestAnimationFrame(tick);
+        } else {
+          raf = 0;
+        }
+      };
+
+      const move = (e: PointerEvent) => {
+        const r = el.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top  + r.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const dist = Math.hypot(dx, dy);
+        if (dist < RADIUS) {
+          const k = (1 - dist / RADIUS) * PULL;
+          targetX = dx * k;
+          targetY = dy * k;
+        } else {
+          targetX = 0; targetY = 0;
+        }
+        if (!raf) raf = requestAnimationFrame(tick);
+      };
+
+      const reset = () => {
+        targetX = 0; targetY = 0;
+        if (!raf) raf = requestAnimationFrame(tick);
+      };
+
+      document.addEventListener("pointermove", move);
+      el.addEventListener("pointerleave", reset);
+    }
+  }
+</script>
