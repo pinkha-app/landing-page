@@ -4,9 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 
 // `site` powers sitemap URLs, canonical links and absolute Open Graph paths.
-// Replace this with the Vercel-provided URL (or custom domain) once deployed.
 export default defineConfig({
-  site: "https://landing-page-mu-virid-91.vercel.app",
+  site: "https://pinkha.app",
 
   vite: {
     plugins: [tailwindcss()],
