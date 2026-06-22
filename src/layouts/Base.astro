@@ -21,7 +21,7 @@ const {
   showNav = true,
 } = Astro.props;
 
-const siteOrigin = Astro.site?.origin ?? "https://pinkha-app.vercel.app";
+const siteOrigin = Astro.site?.origin ?? "https://landing-page-mu-virid-91.vercel.app";
 const canonical  = new URL(path, siteOrigin).toString();
 const ogImageAbs = new URL(ogImage, siteOrigin).toString();
 
