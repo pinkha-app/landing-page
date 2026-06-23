@@ -12,7 +12,33 @@ import Legal from "../layouts/Legal.astro";
   </p>
 
   <h2>What data we collect</h2>
-  <p>None directly. There is no Pinkha account, no analytics SDK, no advertising tracker. We do not know who you are or how you use the app.</p>
+  <p>
+    Inside the iOS app: nothing directly. There is no Pinkha account, no
+    advertising tracker, no behavioural analytics. We do not know who you
+    are or how you use the app.
+  </p>
+  <p>
+    On this website (<code>pinkha.app</code>): cookieless web analytics via
+    Vercel — see the next section.
+  </p>
+
+  <h2>Web analytics (Vercel) — website only</h2>
+  <p>
+    This marketing site uses <a href="https://vercel.com/docs/analytics" target="_blank" rel="noopener noreferrer">Vercel Web Analytics</a> to measure aggregate traffic. It is cookieless and does not build a user profile.
+  </p>
+  <p>What it sees per page view:</p>
+  <ul>
+    <li>The pathname you visited (e.g. <code>/privacy</code>) — no query strings;</li>
+    <li>The page that referred you here (e.g. <code>twitter.com</code>);</li>
+    <li>Your browser type and OS (e.g. <code>Safari on iOS</code>);</li>
+    <li>Your country, derived from your IP at request time — your IP is not stored.</li>
+  </ul>
+  <p>
+    Vercel hashes a per-day fingerprint so two visits from the same browser within 24h are counted once. After 24h the fingerprint changes. No persistent identifier crosses days, no cookie is set on your device.
+  </p>
+  <p>
+    <strong>This applies only to the website</strong>. The iOS app itself sends no web-style analytics anywhere.
+  </p>
 
   <h2>Crash reports (Sentry)</h2>
   <p>
@@ -42,7 +68,8 @@ import Legal from "../layouts/Legal.astro";
 
   <h2>Third-party services summary</h2>
   <ul>
-    <li><strong>Sentry</strong> (crash + performance) — anonymous, no note content.</li>
+    <li><strong>Vercel Web Analytics</strong> (website only) — aggregate page views, cookieless, no profile.</li>
+    <li><strong>Sentry</strong> (iOS app crash + performance) — anonymous, no note content.</li>
     <li><strong>Notion API</strong> (only if you import) — via our OAuth proxy, no token storage server-side.</li>
     <li><strong>Apple TestFlight</strong> (beta only) — Apple's own telemetry applies, see Apple's policies.</li>
   </ul>
