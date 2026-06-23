@@ -1,27 +1,11 @@
 ---
 import Decor from "./Decor.astro";
 import Reveal from "./Reveal.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-const features = [
-  {
-    glyph: "leaf",
-    title: "Leaves",
-    body: "Rich-text notes powered by a Rust core. Inline styles, nested blocks, callouts, todos, code, embeds. Native iOS feel, zero lag — even on a leaf the size of a novel chapter.",
-    accent: "clay-300",
-  },
-  {
-    glyph: "book",
-    title: "Books",
-    body: "Notion-style databases. Properties, filters, sorts, views — table, kanban, calendar, gallery. Every row is a real Leaf, with its own page underneath.",
-    accent: "clay-400",
-  },
-  {
-    glyph: "shelf",
-    title: "Shelves",
-    body: "Folders that hold loose leaves and bound books. Build a library that matches the way you think — not what an app dictates.",
-    accent: "clay-500",
-  },
-];
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).features;
+const features = t.items;
 ---
 
 <section id="features" class="relative isolate px-6 py-24 md:py-32 overflow-hidden">
@@ -39,11 +23,11 @@ const features = [
           <Decor type="twig" class="w-16 text-clay-300/90" float="none" />
         </div>
         <p class="font-mono uppercase tracking-[0.25em] text-clay-400 text-xs mb-4">
-          A library, not a feed
+          {t.eyebrow}
         </p>
         <h2 class="font-serif text-4xl md:text-6xl font-medium text-ink-900 leading-[1.05] max-w-3xl mx-auto">
-          Take, bind, shelve.<br />
-          <span class="italic text-clay-500">Notes that grow with you.</span>
+          {t.title1}<br />
+          <span class="italic text-clay-500">{t.title2}</span>
         </h2>
       </div>
     </Reveal>
@@ -83,7 +67,7 @@ const features = [
             </div>
 
             <p class="font-serif italic text-clay-400 text-sm lowercase tracking-wide mb-2">
-              {f.glyph}.
+              {f.glyphLabel}.
             </p>
             <h3 class="font-serif text-2xl md:text-3xl font-medium text-ink-900 mb-3">
               {f.title}

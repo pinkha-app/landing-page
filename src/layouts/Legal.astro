@@ -1,6 +1,7 @@
 ---
 import Base from "./Base.astro";
 import Footer from "../components/Footer.astro";
+import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
 
 interface Props {
   title: string;
@@ -9,20 +10,24 @@ interface Props {
 }
 
 const { title, updated, description } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).legal;
+const homeHref = localizePath("/", lang);
 ---
 
 <Base title={`${title} — Pinkha`} description={description}>
   <article class="px-6 pt-24 pb-16 max-w-2xl mx-auto">
     <a
-      href="/"
+      href={homeHref}
       class="font-mono text-xs uppercase tracking-widest text-clay-400 hover:text-clay-500"
     >
-      ← back to pinkha
+      {t.back}
     </a>
     <h1 class="font-serif text-4xl md:text-5xl font-medium text-ink-900 mt-6 mb-3">
       {title}
     </h1>
-    <p class="text-sm text-ink-500 italic mb-12">Last updated {updated}</p>
+    <p class="text-sm text-ink-500 italic mb-12">{t.lastUpdated} {updated}</p>
 
     <div
       class="prose-pinkha space-y-6 text-ink-700 leading-relaxed [&_h2]:font-serif [&_h2]:text-2xl [&_h2]:font-medium [&_h2]:text-ink-900 [&_h2]:mt-12 [&_h2]:mb-3 [&_a]:text-clay-500 [&_a]:underline [&_strong]:text-ink-900 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_code]:font-mono [&_code]:text-sm [&_code]:bg-cream-100 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded"

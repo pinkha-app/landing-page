@@ -1,0 +1,59 @@
+---
+import Legal from "../../layouts/Legal.astro";
+---
+
+<Legal
+  title="Confidentialité"
+  updated="22 juin 2026"
+  description="Comment Pinkha traite vos données. Les notes restent sur l'appareil, aucune analyse, aucun pistage. Rapports de plantage via Sentry, import Notion optionnel via OAuth."
+>
+  <p>
+    Pinkha est <strong>local-first par conception</strong>. Vos notes, livres et étagères sont stockés exclusivement sur votre appareil — ils ne sont jamais envoyés vers un serveur Pinkha, car aucun serveur Pinkha n'existe.
+  </p>
+
+  <h2>Quelles données nous collectons</h2>
+  <p>Aucune, directement. Il n'y a pas de compte Pinkha, pas de SDK d'analyse, pas de traceur publicitaire. Nous ne savons pas qui vous êtes ni comment vous utilisez l'app.</p>
+
+  <h2>Rapports de plantage (Sentry)</h2>
+  <p>
+    Pour détecter les plantages et les régressions de performance, Pinkha envoie des données de diagnostic anonymes à <a href="https://sentry.io" target="_blank" rel="noopener noreferrer">Sentry</a>. Cela inclut :
+  </p>
+  <ul>
+    <li>Les traces de pile des plantages et la version d'iOS au moment du plantage ;</li>
+    <li>Le modèle d'appareil anonyme (ex. <code>iPhone 17,1</code>) ;</li>
+    <li>Le traçage d'opérations internes à l'app pour repérer les chemins lents.</li>
+  </ul>
+  <p>
+    Ces rapports ne contiennent jamais le contenu de vos notes, vos entrées de livres, ni aucun texte que vous avez saisi. Vous pouvez le vérifier dans le code source : voir <a href="https://github.com/pinkha-app/pinkha/blob/master/app/Packages/PinkhaCore/Sources/PinkhaCore/Observability.swift" target="_blank" rel="noopener noreferrer">Observability.swift</a>.
+  </p>
+
+  <h2>Import Notion (optionnel)</h2>
+  <p>
+    Si vous choisissez d'importer depuis Notion, Pinkha utilise le flux OAuth officiel de Notion. L'échange passe par notre proxy de jetons <code>notion-proxy</code>, qui ne fait que relayer la poignée de main OAuth — <strong>votre jeton d'accès Notion n'est jamais stocké sur nos serveurs</strong>. Il est livré directement à l'app et conservé uniquement dans le Trousseau iOS de votre appareil (<code>kSecAttrAccessibleWhenUnlockedThisDeviceOnly</code>, jamais synchronisé avec iCloud).
+  </p>
+  <p>
+    Note : pendant le déroulement du flux OAuth, notre proxy est l'intermédiaire entre Notion et l'app. La propre gestion des données de Notion s'applique à tout ce que vous y avez stocké — voir la <a href="https://www.notion.so/Privacy-Policy-3468d120cf614d4c9014c09f6adc9091" target="_blank" rel="noopener noreferrer">politique de confidentialité de Notion</a>.
+  </p>
+
+  <h2>Autres imports (Bear, Craft)</h2>
+  <p>
+    Les imports Bear et Craft sont 100 % locaux. Vous sélectionnez un fichier depuis l'app Fichiers d'iOS, Pinkha le lit sur l'appareil et le convertit en notes pinkha. Rien ne quitte votre appareil.
+  </p>
+
+  <h2>Récapitulatif des services tiers</h2>
+  <ul>
+    <li><strong>Sentry</strong> (plantages + performance) — anonyme, aucun contenu de note.</li>
+    <li><strong>API Notion</strong> (uniquement si vous importez) — via notre proxy OAuth, aucun stockage de jeton côté serveur.</li>
+    <li><strong>Apple TestFlight</strong> (bêta uniquement) — la télémétrie propre d'Apple s'applique, voir les politiques d'Apple.</li>
+  </ul>
+
+  <h2>Vos droits</h2>
+  <p>
+    Comme nous ne stockons aucune donnée personnelle, il n'y a rien à supprimer ni à vous transmettre. Pour cesser tout rapport de diagnostic, désinstallez l'app.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions : <a href="mailto:ybikouta.pro@icloud.com">ybikouta.pro@icloud.com</a>
+  </p>
+</Legal>

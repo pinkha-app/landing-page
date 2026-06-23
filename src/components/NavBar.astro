@@ -1,17 +1,28 @@
 ---
+import { getLangFromUrl, useTranslations, localizePath } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).nav;
+const tLang = useTranslations(lang).langSwitch;
+const homeHref = localizePath("/", lang);
+
+// Equivalents of the current page in each locale, for the switcher.
+const altEn = localizePath(Astro.url.pathname, "en");
+const altFr = localizePath(Astro.url.pathname, "fr");
+
 const links = [
   {
-    label: "Features",
+    key: "features" as const,
     href: "#features",
     icon: '<path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>',
   },
   {
-    label: "Screens",
+    key: "screens" as const,
     href: "#screens",
     icon: '<rect x="6" y="3" width="12" height="18" rx="3" stroke="currentColor" stroke-width="1.8"/><line x1="10.5" y1="18" x2="13.5" y2="18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
   },
   {
-    label: "Source",
+    key: "source" as const,
     href: "#source",
     icon: '<path d="M8 6 3 12l5 6M16 6l5 6-5 6M14 4l-4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
   },
@@ -33,7 +44,7 @@ const testflightUrl =
     <span aria-hidden="true" class="lg-depth"></span>
 
     <div class="lg-content">
-      <a href="/" class="nav-brand" aria-label="Pinkha home">
+      <a href={homeHref} class="nav-brand" aria-label={t.home}>
         <img src="/icons/bowl.png" alt="Pinkha" width="28" height="28" />
       </a>
 
@@ -43,14 +54,30 @@ const testflightUrl =
             <a href={l.href} class="nav-link">
               <span class="nav-link-bubble" aria-hidden="true" />
               <svg viewBox="0 0 24 24" fill="none" width="16" height="16" class="nav-icon" set:html={l.icon} />
-              <span class="nav-label">{l.label}</span>
+              <span class="nav-label">{t[l.key]}</span>
             </a>
           ))
         }
       </div>
 
+      <div class="nav-lang" role="group" aria-label={tLang.label}>
+        <a
+          href={altEn}
+          data-lang-set="en"
+          class:list={["nav-lang-opt", { "is-active": lang === "en" }]}
+          aria-current={lang === "en" ? "true" : undefined}
+        >EN</a>
+        <span class="nav-lang-sep" aria-hidden="true">/</span>
+        <a
+          href={altFr}
+          data-lang-set="fr"
+          class:list={["nav-lang-opt", { "is-active": lang === "fr" }]}
+          aria-current={lang === "fr" ? "true" : undefined}
+        >FR</a>
+      </div>
+
       <a href={testflightUrl} target="_blank" rel="noopener noreferrer" class="nav-cta">
-        <span>Get the beta</span>
+        <span>{t.cta}</span>
         <svg viewBox="0 0 24 24" fill="none" width="14" height="14">
           <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -227,9 +254,29 @@ const testflightUrl =
   }
   .nav-icon { color: currentColor; opacity: 0.85; }
 
+  /* ── Language switcher ──────────────────────────────────────── */
+  .nav-lang {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 0 0.15rem;
+  }
+  .nav-lang-opt {
+    color: var(--color-clay-400);
+    text-shadow: 0 1px 0 rgba(255, 245, 230, 0.6);
+    transition: color 180ms ease;
+    padding: 0.25rem 0.1rem;
+  }
+  .nav-lang-opt:hover { color: var(--color-clay-600); }
+  .nav-lang-opt.is-active { color: var(--color-ink-900); }
+  .nav-lang-sep { color: var(--color-clay-300); }
+
   /* ── CTA — tinted Liquid Glass with terracotta body ─────────── */
   .nav-cta {
-    margin-left: auto;
+    margin-left: 0.5rem;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -258,4 +305,19 @@ const testflightUrl =
   }
   .nav-cta:active { transform: translateY(0); }
 </style>
+
+<script>
+  // When the visitor picks a language, remember it in a cookie so the edge
+  // middleware stops auto-redirecting against their manual choice. Delegated
+  // + guarded so it survives view transitions without double-binding.
+  if (!(window as any).__pinkhaLangBound) {
+    (window as any).__pinkhaLangBound = true;
+    document.addEventListener("click", (e) => {
+      const el = (e.target as Element)?.closest?.("[data-lang-set]");
+      if (!el) return;
+      const choice = el.getAttribute("data-lang-set");
+      document.cookie = `pinkha_lang=${choice}; path=/; max-age=31536000; samesite=lax`;
+    });
+  }
+</script>
 
