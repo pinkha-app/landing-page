@@ -221,8 +221,8 @@ export const ui = {
     },
     source: {
       eyebrow: "Open source",
-      title1: "Un éditeur de texte enrichi en Rust",
-      title2: "n'existait pas. Maintenant si.",
+      title1: "Aucun éditeur de texte enrichi en Rust",
+      title2: "n'existait. Maintenant si.",
       intro:
         "Tout est à ciel ouvert. Lisez le code, forkez-le, embarquez-le dans votre propre app. MIT ou Apache 2.0 — au choix.",
       repos: [
