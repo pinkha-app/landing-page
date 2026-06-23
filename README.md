@@ -1,43 +1,61 @@
-# Astro Starter Kit: Minimal
+<div align="center">
+  <img src="public/icons/bowl.png" width="120" alt="Pinkha bowl" />
+
+  # pinkha.app — landing
+
+  Marketing site for [Pinkha](https://github.com/pinkha-app/pinkha) — beautiful, native notes for iPhone, iPad and Mac.
+
+  **Live →** [landing-page-mu-virid-91.vercel.app](https://landing-page-mu-virid-91.vercel.app)
+</div>
+
+---
+
+## Stack
+
+- [Astro 7](https://astro.build) — static site framework
+- [Tailwind CSS v4](https://tailwindcss.com) — utility-first styling
+- [@fontsource/fraunces](https://fontsource.org) + [@fontsource/inter](https://fontsource.org) — variable web fonts
+- TypeScript (strict)
+- Auto-deploy to [Vercel](https://vercel.com) on push to `master`
+
+## Develop
 
 ```sh
-pnpm create astro@latest -- --template minimal
+pnpm install
+pnpm dev          # http://localhost:4321
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Build
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+pnpm build        # → ./dist
+pnpm preview      # serves the built output
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Structure
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```
+src/
+├── components/   Hero, Features, Manifesto, Screenshots, OpenSource, Footer, Decor, NavBar, Particles, Reveal
+├── layouts/      Base (head, OG, JSON-LD, ClientRouter) and Legal (privacy/terms)
+├── pages/        index, privacy, terms, 404
+└── styles/       global.css (Tailwind theme + custom selection, scroll-padding)
+public/
+├── icons/        bowl.png — the app logo
+├── robots.txt
+└── favicon.{png,ico}
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deploy
 
-## 🧞 Commands
+Pushes to `master` trigger a fresh production deploy on Vercel automatically. PRs get their own preview URL.
 
-All commands are run from the root of the project, from a terminal:
+To deploy manually:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+```sh
+vercel --prod
+```
 
-## 👀 Want to learn more?
+## License
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Dual MIT / Apache 2.0 — see [LICENSE-MIT](LICENSE-MIT) and [LICENSE-APACHE](LICENSE-APACHE).
