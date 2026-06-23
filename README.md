@@ -5,7 +5,7 @@
 
   Marketing site for [Pinkha](https://github.com/pinkha-app/pinkha) — beautiful, native notes for iPhone, iPad and Mac.
 
-  **Live →** [landing-page-mu-virid-91.vercel.app](https://landing-page-mu-virid-91.vercel.app)
+  **Live →** [pinkha.app](https://pinkha.app)
 </div>
 
 ---
