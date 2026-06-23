@@ -7,12 +7,12 @@ import Screenshots from "../components/Screenshots.astro";
 import OpenSource from "../components/OpenSource.astro";
 import Footer from "../components/Footer.astro";
 import Particles from "../components/Particles.astro";
+import { ui } from "../i18n/ui";
+
+const meta = ui.en.meta;
 ---
 
-<Base
-  title="Pinkha — Beautiful native notes for iPhone, iPad and Mac"
-  description="Pinkha is a native notes app with a Rust-powered rich-text editor and Notion-style databases. iOS 26+, open source under MIT or Apache 2.0. Join the TestFlight beta."
->
+<Base title={meta.homeTitle} description={meta.homeDescription}>
   <Particles />
   <Hero />
   <Features />

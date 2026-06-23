@@ -1,5 +1,9 @@
 ---
 import Decor from "./Decor.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).hero;
 
 const testflightUrl =
   Astro.props.testflightUrl ??
@@ -35,7 +39,7 @@ const testflightUrl =
       ></div>
       <img
         src="/icons/bowl.png"
-        alt="Pinkha bowl logo — a small terracotta bowl."
+        alt={t.bowlAlt}
         width="160"
         height="160"
         data-parallax-bowl
@@ -45,26 +49,25 @@ const testflightUrl =
     </div>
 
     <p class="font-mono text-xs uppercase tracking-[0.25em] text-clay-400 mb-5">
-      pinkha &middot; v1.0 beta
+      {t.eyebrow}
     </p>
 
     <h1
       class="font-serif text-6xl md:text-8xl font-medium tracking-tight text-ink-900 leading-[0.95]"
     >
-      Take a leaf.
+      {t.title1}
     </h1>
     <h1
       class="font-serif text-6xl md:text-8xl font-medium tracking-tight italic text-clay-500 leading-[0.95] mt-1"
     >
-      Grow a library.
+      {t.title2}
     </h1>
 
     <p
       class="mt-8 text-lg md:text-2xl text-ink-500 leading-relaxed max-w-2xl mx-auto font-serif"
     >
-      Notes you'll actually want to come back to.
-      Native on iPhone, iPad and Mac. Rich text in Rust.
-      {" "}<span class="text-ink-700">Open source.</span>
+      {t.subtitle}
+      {" "}<span class="text-ink-700">{t.subtitleEmphasis}</span>
     </p>
 
     <div class="mt-12 flex flex-col sm:flex-row gap-3 justify-center">
@@ -75,7 +78,7 @@ const testflightUrl =
         data-magnetic
         class="inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 px-7 py-3.5 text-cream-50 font-medium hover:bg-clay-500 transition-colors shadow-[0_8px_24px_-6px_rgba(126,73,35,0.4)] will-change-transform"
       >
-        Join the TestFlight beta
+        {t.ctaPrimary}
         <span aria-hidden="true">→</span>
       </a>
       <a
@@ -87,12 +90,12 @@ const testflightUrl =
         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
           <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.67.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.21c0 .21.15.46.55.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/>
         </svg>
-        Star on GitHub
+        {t.ctaSecondary}
       </a>
     </div>
 
     <p class="mt-10 text-xs text-clay-400 font-mono">
-      free &middot; iOS 26+ &middot; ipad &amp; mac coming
+      {t.baseline}
     </p>
   </div>
 </section>

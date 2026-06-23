@@ -1,29 +1,14 @@
 ---
 import Decor from "./Decor.astro";
 import Reveal from "./Reveal.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).screens;
 
 // Placeholders — drop real PNGs into /public/screens/ named:
 // editor.png, book.png, library.png
-const shots = [
-  {
-    src: "/screens/editor.png",
-    label: "leaf",
-    caption: "An editor that disappears.",
-    body: "Markdown shortcuts, inline color, drag to reorder. Undo 1000 steps deep.",
-  },
-  {
-    src: "/screens/book.png",
-    label: "book",
-    caption: "Databases that feel like paper.",
-    body: "Table, kanban, calendar. Properties, filters, sorts. Native iOS, native speed.",
-  },
-  {
-    src: "/screens/library.png",
-    label: "library",
-    caption: "A home that breathes.",
-    body: "Recents, shelves, books, compost. Everything you need, nothing you don't.",
-  },
-];
+const shots = t.shots;
 ---
 
 <section id="screens" class="relative isolate px-6 py-24 md:py-32 bg-clay-50/40 border-y border-clay-200/30 overflow-hidden">
@@ -39,11 +24,11 @@ const shots = [
           <Decor type="twig" class="w-16 text-clay-300/90 rotate-180" float="none" />
         </div>
         <p class="font-mono uppercase tracking-[0.25em] text-clay-400 text-xs mb-4">
-          Native to the bone
+          {t.eyebrow}
         </p>
         <h2 class="font-serif text-4xl md:text-6xl font-medium text-ink-900 leading-[1.05] max-w-3xl mx-auto">
-          SwiftUI on top.<br />
-          <span class="italic text-clay-500">Rust underneath.</span>
+          {t.title1}<br />
+          <span class="italic text-clay-500">{t.title2}</span>
         </h2>
       </div>
     </Reveal>

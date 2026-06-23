@@ -1,27 +1,28 @@
 ---
 import Decor from "./Decor.astro";
 import Reveal from "./Reveal.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang).source;
 
 const repos = [
   {
     name: "pinkha",
-    desc: "The app. Rust core + SwiftUI front. iOS 26+.",
     href: "https://github.com/pinkha-app/pinkha",
     license: "MIT · Apache 2.0",
   },
   {
     name: "chaqaq",
-    desc: "Standalone rich-text editor crate. Use it in your own Rust app.",
     href: "https://github.com/pinkha-app/pinkha/tree/master/crates/chaqaq",
     license: "crates.io",
   },
   {
     name: "realm-codec",
-    desc: "Read & write Realm v9 binary. Powers the Craft importer.",
     href: "https://github.com/pinkha-app/pinkha/tree/master/crates/realm-codec",
     license: "crates.io",
   },
-];
+].map((r, i) => ({ ...r, desc: t.repos[i].desc }));
 ---
 
 <section id="source" class="relative isolate px-6 py-24 md:py-32 overflow-hidden">
@@ -36,15 +37,14 @@ const repos = [
         <Decor type="twig" class="w-16 text-clay-300/90" float="none" />
       </div>
       <p class="font-mono uppercase tracking-[0.25em] text-clay-400 text-xs mb-4">
-        Open source
+        {t.eyebrow}
       </p>
       <h2 class="font-serif text-4xl md:text-6xl font-medium text-ink-900 mb-6 leading-[1.05]">
-        A rich text editor in Rust
-        <span class="italic text-clay-500 block">didn't exist. Now it does.</span>
+        {t.title1}
+        <span class="italic text-clay-500 block">{t.title2}</span>
       </h2>
       <p class="text-lg text-ink-500 leading-relaxed max-w-2xl mx-auto mb-16">
-        Every piece is in the open. Read the code, fork it, ship it in your own app.
-        MIT or Apache 2.0 — your pick.
+        {t.intro}
       </p>
     </Reveal>
 
@@ -73,13 +73,13 @@ const repos = [
     </div>
 
     <p class="mt-16 text-sm text-ink-500 italic font-serif">
-      Built solo, in the open, with love.
+      {t.outroPrefix}
       <a
         href="https://github.com/pinkha-app/pinkha"
         target="_blank"
         rel="noopener noreferrer"
         class="text-clay-500 underline"
-      >Send a PR.</a>
+      >{t.outroLink}</a>
     </p>
   </div>
 </section>

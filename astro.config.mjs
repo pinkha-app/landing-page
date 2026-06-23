@@ -7,6 +7,14 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://pinkha.app",
 
+  // English is the default locale, served at the root (`/`). French lives
+  // under `/fr/`. `prefixDefaultLocale: false` keeps EN URLs prefix-free.
+  i18n: {
+    locales: ["en", "fr"],
+    defaultLocale: "en",
+    routing: { prefixDefaultLocale: false },
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
@@ -16,6 +24,11 @@ export default defineConfig({
       changefreq: "weekly",
       priority: 0.7,
       lastmod: new Date(),
+      // Emit <xhtml:link rel="alternate" hreflang> pairs in the sitemap.
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en", fr: "fr" },
+      },
     }),
   ],
 });
