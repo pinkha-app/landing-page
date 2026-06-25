@@ -5,14 +5,22 @@ import Legal from "../layouts/Legal.astro";
 <Legal
   title="Privacy"
   updated="June 22, 2026"
-  description="How Pinkha handles your data. Notes stay on-device, no analytics, no tracking. Crash reports via Sentry, optional Notion import via OAuth."
+  description="How Pinkha handles your data. Your notes stay on-device. The app sends only anonymous crash reports (Sentry); the website uses privacy-friendly, cookieless Vercel analytics."
 >
   <p>
     Pinkha is <strong>local-first by design</strong>. Your notes, books, and shelves are stored exclusively on your device — they are never sent to a Pinkha server, because no Pinkha server exists.
   </p>
 
   <h2>What data we collect</h2>
-  <p>None directly. There is no Pinkha account, no analytics SDK, no advertising tracker. We do not know who you are or how you use the app.</p>
+  <p>
+    It helps to separate two things: the <strong>app</strong> and this <strong>website</strong>.
+  </p>
+  <p>
+    <strong>The app</strong> has no Pinkha account, no advertising tracker, and no in-app analytics SDK. Your notes never leave your device. The only thing it sends is anonymous crash diagnostics (below).
+  </p>
+  <p>
+    <strong>This website</strong> (pinkha.app) uses privacy-friendly, cookieless analytics from Vercel to count visits and measure page speed (below). It can never see your notes — the app and the website are entirely separate.
+  </p>
 
   <h2>Crash reports (Sentry)</h2>
   <p>
@@ -25,6 +33,21 @@ import Legal from "../layouts/Legal.astro";
   </ul>
   <p>
     These reports never contain the content of your notes, your book entries, or any text you have typed. You can verify this in the source: see <a href="https://github.com/pinkha-app/pinkha/blob/master/app/Packages/PinkhaCore/Sources/PinkhaCore/Observability.swift" target="_blank" rel="noopener noreferrer">Observability.swift</a>.
+  </p>
+
+  <h2>Website analytics (Vercel)</h2>
+  <p>
+    pinkha.app is hosted on <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">Vercel</a> and uses Vercel Web Analytics and Speed Insights. Both are <strong>cookieless</strong>: no persistent identifier is written to your device, and there is no cross-site tracking. Per Vercel's documentation, they collect:
+  </p>
+  <ul>
+    <li>Page views — the pathname only, never the query string;</li>
+    <li>Your browser type (user-agent) and device category;</li>
+    <li>Approximate location at <strong>country level</strong> only;</li>
+    <li>The referrer (the page you arrived from);</li>
+    <li>An anonymized, short-lived identifier — no cookies, no persistent ID.</li>
+  </ul>
+  <p>
+    Speed Insights additionally measures real-world loading performance (Core Web Vitals) so we can keep the site fast. None of this involves the app or your notes. See <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">Vercel's analytics privacy documentation</a>.
   </p>
 
   <h2>Notion import (optional)</h2>
@@ -42,7 +65,8 @@ import Legal from "../layouts/Legal.astro";
 
   <h2>Third-party services summary</h2>
   <ul>
-    <li><strong>Sentry</strong> (crash + performance) — anonymous, no note content.</li>
+    <li><strong>Sentry</strong> (app crash + performance) — anonymous, no note content.</li>
+    <li><strong>Vercel</strong> (website hosting + analytics) — cookieless, country-level location, no note content.</li>
     <li><strong>Notion API</strong> (only if you import) — via our OAuth proxy, no token storage server-side.</li>
     <li><strong>Apple TestFlight</strong> (beta only) — Apple's own telemetry applies, see Apple's policies.</li>
   </ul>

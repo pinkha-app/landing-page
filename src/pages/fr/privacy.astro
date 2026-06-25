@@ -5,14 +5,22 @@ import Legal from "../../layouts/Legal.astro";
 <Legal
   title="Confidentialité"
   updated="22 juin 2026"
-  description="Comment Pinkha traite vos données. Les notes restent sur l'appareil, aucune analyse, aucun pistage. Rapports de plantage via Sentry, import Notion optionnel via OAuth."
+  description="Comment Pinkha traite vos données. Vos notes restent sur l'appareil. L'app n'envoie que des rapports de plantage anonymes (Sentry) ; le site utilise des analyses Vercel respectueuses de la vie privée, sans cookies."
 >
   <p>
     Pinkha est <strong>local-first par conception</strong>. Vos notes, livres et étagères sont stockés exclusivement sur votre appareil — ils ne sont jamais envoyés vers un serveur Pinkha, car aucun serveur Pinkha n'existe.
   </p>
 
   <h2>Quelles données nous collectons</h2>
-  <p>Aucune, directement. Il n'y a pas de compte Pinkha, pas de SDK d'analyse, pas de traceur publicitaire. Nous ne savons pas qui vous êtes ni comment vous utilisez l'app.</p>
+  <p>
+    Il faut distinguer deux choses : l'<strong>app</strong> et ce <strong>site web</strong>.
+  </p>
+  <p>
+    <strong>L'app</strong> n'a pas de compte Pinkha, pas de traceur publicitaire et aucun SDK d'analyse intégré. Vos notes ne quittent jamais votre appareil. La seule chose qu'elle envoie, ce sont des diagnostics de plantage anonymes (ci-dessous).
+  </p>
+  <p>
+    <strong>Ce site</strong> (pinkha.app) utilise des analyses Vercel respectueuses de la vie privée et sans cookies, pour compter les visites et mesurer la vitesse des pages (ci-dessous). Il ne peut jamais voir vos notes — l'app et le site sont totalement séparés.
+  </p>
 
   <h2>Rapports de plantage (Sentry)</h2>
   <p>
@@ -25,6 +33,21 @@ import Legal from "../../layouts/Legal.astro";
   </ul>
   <p>
     Ces rapports ne contiennent jamais le contenu de vos notes, vos entrées de livres, ni aucun texte que vous avez saisi. Vous pouvez le vérifier dans le code source : voir <a href="https://github.com/pinkha-app/pinkha/blob/master/app/Packages/PinkhaCore/Sources/PinkhaCore/Observability.swift" target="_blank" rel="noopener noreferrer">Observability.swift</a>.
+  </p>
+
+  <h2>Analyses du site (Vercel)</h2>
+  <p>
+    pinkha.app est hébergé sur <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">Vercel</a> et utilise Vercel Web Analytics et Speed Insights. Les deux sont <strong>sans cookies</strong> : aucun identifiant persistant n'est écrit sur votre appareil, et il n'y a aucun pistage inter-sites. D'après la documentation de Vercel, ils collectent :
+  </p>
+  <ul>
+    <li>Les pages vues — uniquement le chemin (pathname), jamais la chaîne de requête ;</li>
+    <li>Le type de navigateur (user-agent) et la catégorie d'appareil ;</li>
+    <li>La localisation approximative au <strong>niveau du pays</strong> uniquement ;</li>
+    <li>Le référent (la page d'où vous venez) ;</li>
+    <li>Un identifiant anonymisé et éphémère — pas de cookies, pas d'ID persistant.</li>
+  </ul>
+  <p>
+    Speed Insights mesure en plus la performance de chargement réelle (Core Web Vitals) pour garder le site rapide. Rien de tout cela ne concerne l'app ni vos notes. Voir la <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">documentation de Vercel sur la confidentialité des analyses</a>.
   </p>
 
   <h2>Import Notion (optionnel)</h2>
@@ -42,7 +65,8 @@ import Legal from "../../layouts/Legal.astro";
 
   <h2>Récapitulatif des services tiers</h2>
   <ul>
-    <li><strong>Sentry</strong> (plantages + performance) — anonyme, aucun contenu de note.</li>
+    <li><strong>Sentry</strong> (plantages app + performance) — anonyme, aucun contenu de note.</li>
+    <li><strong>Vercel</strong> (hébergement du site + analyses) — sans cookies, localisation au niveau du pays, aucun contenu de note.</li>
     <li><strong>API Notion</strong> (uniquement si vous importez) — via notre proxy OAuth, aucun stockage de jeton côté serveur.</li>
     <li><strong>Apple TestFlight</strong> (bêta uniquement) — la télémétrie propre d'Apple s'applique, voir les politiques d'Apple.</li>
   </ul>
